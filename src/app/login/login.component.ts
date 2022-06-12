@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  isFieldValid(field: string) {
+  isFieldValid(field: string): boolean {
     let fieldObj = this.loginForm.get(field);
     return fieldObj != null ? !fieldObj.valid && fieldObj.touched : false;
     
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(): void{
+  private login(): void{
     let result = this.steamBackendService.getData('user/'+this.loginForm.value.username+'/'+this.loginForm.value.password);
     result.subscribe(data => {
       console.log('Response: ',data);
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  register(): void{
+  private register(): void{
     console.log('Fired register function');
     let result = this.steamBackendService.postData('user/'+this.loginForm.value.username+'/'+this.loginForm.value.password, null);
     result.subscribe((data) => {
